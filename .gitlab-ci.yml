@@ -7,11 +7,8 @@ stages:
 - release
 
 variables:
-  CONTAINER_TEST_IMAGE: registry.gitlab.com/keymono/ci:$CI_BUILD_REF_NAME
-  CONTAINER_RELEASE_IMAGE: registry.gitlab.com/keymono/ci:latest
-
-before_script:
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+  CONTAINER_TEST_IMAGE: $GCR_ENDPOINT/$GCP_PROJECT/ci:$CI_BUILD_REF
+  CONTAINER_RELEASE_IMAGE: $GCR_ENDPOINT/$GCP_PROJECT/ci:latest
 
 build:
   stage: build
@@ -19,7 +16,7 @@ build:
     - docker build --pull -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
-release-image:
+release:
   stage: release
   script:
     - docker pull $CONTAINER_TEST_IMAGE
