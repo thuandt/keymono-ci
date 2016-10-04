@@ -8,7 +8,7 @@ ENV CLOUDSDK_VERSION 128.0.0
 COPY scripts/install_protoc.sh /usr/scripts/install_protoc.sh
 
 RUN apt-get -qq update && \
-    apt-get install -qq -y --no-install-recommends curl jq rsync expect tcl tcl-tclreadline && \
+    apt-get install -qq -y --no-install-recommends curl jq unzip rsync expect tcl tcl-tclreadline && \
     curl https://glide.sh/get | bash && \
     /bin/bash /usr/scripts/install_protoc.sh && \
     go get github.com/alecthomas/gometalinter \

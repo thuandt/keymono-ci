@@ -1,5 +1,6 @@
 #!/bin/bash
 # Description: Install protoc latest version from Github
+set -euxo pipefail
 
 PROJECT="google/protobuf"
 
