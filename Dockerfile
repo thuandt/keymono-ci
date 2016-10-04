@@ -14,7 +14,8 @@ RUN apt-get -qq update && \
     go get github.com/alecthomas/gometalinter \
            github.com/golang/lint/golint \
            github.com/kisielk/errcheck \
-           github.com/golang/protobuf/{proto,protoc-gen-go} \
+           github.com/golang/protobuf/proto \
+           github.com/golang/protobuf/protoc-gen-go \
            github.com/ckaznocha/protoc-gen-lint && \
     curl -s https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-"${CLOUDSDK_VERSION}"-linux-x86_64.tar.gz | tar -xz -C /opt/ && \
     /opt/google-cloud-sdk/bin/gcloud --quiet components install kubectl && \
