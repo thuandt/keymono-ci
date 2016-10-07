@@ -7,6 +7,11 @@ stages:
 - release
 
 variables:
+  # docker:dind default using vfs.
+  # vfs storage driver which is terribly slow.
+  # https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/issues/1451
+  DOCKER_DRIVER: aufs
+
   CONTAINER_TEST_IMAGE: $GCR_ENDPOINT/$GCP_PROJECT/ci:$CI_BUILD_REF
   CONTAINER_RELEASE_IMAGE: $GCR_ENDPOINT/$GCP_PROJECT/ci:latest
 
