@@ -23,10 +23,13 @@ COPY scripts/install_protoc.sh /usr/scripts/install_protoc.sh
 
 # Enable backports repos and install some system utils included beanstalkd
 RUN echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list && \
+    echo 'deb https://apt.dockerproject.org/repo debian-jessie main' > /etc/apt/sources.list.d/docker-engine.list && \
+    ## Docker repos GPG keys: https://docs.docker.com/engine/installation/linux/debian/#/debian-jessie-80-64-bit
+    apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
     apt-get -qq update && \
     apt-get install -qq -y --no-install-recommends \
             jq unzip rsync expect tcl tcl-tclreadline bzip2 unzip xz-utils \
-            beanstalkd mysql-client
+            beanstalkd mysql-client docker-engine
 
 # Install glide, protoc, gometalinter and some golang tools
 RUN curl https://glide.sh/get | bash && \
@@ -61,7 +64,6 @@ COPY scripts/start-kafka.sh /usr/bin/start-kafka.sh
 
 # Supervisor config
 COPY supervisor /etc/supervisor/conf.d
-
 
 # Install Google Cloud SDK for deployment
 RUN curl -s https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-"${CLOUDSDK_VERSION}"-linux-x86_64.tar.gz | tar -xz -C /opt/ && \
