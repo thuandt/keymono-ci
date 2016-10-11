@@ -17,7 +17,7 @@ ENV SCALA_VERSION 2.11
 ENV KAFKA_VERSION 0.10.0.1
 ENV KAFKA_MIRROR http://apache.stu.edu.tw/kafka
 ENV KAFKA_HOME /opt/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION"
-ENV PATH=$KAFKA_HOME/bin:$PATH
+ENV PATH=/opt/google-cloud-sdk/bin:$KAFKA_HOME/bin:$PATH
 
 COPY scripts/install_protoc.sh /usr/scripts/install_protoc.sh
 
