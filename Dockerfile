@@ -20,10 +20,13 @@ ENV KAFKA_HOME /opt/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION"
 ENV PATH=/opt/google-cloud-sdk/bin:$KAFKA_HOME/bin:$PATH
 
 COPY scripts/install_protoc.sh /usr/scripts/install_protoc.sh
+COPY config/locale /etc/default/locale
 
 # Enable backports repos and install some system utils included beanstalkd
 RUN apt-get -qq update && \
-    apt-get install -qq -y --no-install-recommends apt-transport-https ca-certificates && \
+    apt-get install -qq -y --no-install-recommends apt-utils locales apt-transport-https ca-certificates && \
+    locale-gen en en_US en_US.UTF-8 && \
+    dpkg-reconfigure locales && \
     echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list && \
     echo 'deb https://apt.dockerproject.org/repo debian-jessie main' > /etc/apt/sources.list.d/docker-engine.list && \
     ## Docker repos GPG keys: https://docs.docker.com/engine/installation/linux/debian/#/debian-jessie-80-64-bit
@@ -74,5 +77,9 @@ RUN curl -s https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
 
 # 2181 is zookeeper, 9092 is kafka, 11300 is beanstalkd
 EXPOSE 2181 9092 11300
+
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
 
 CMD ["/usr/bin/supervisord", "--nodaemon", "-c", "/etc/supervisor/supervisord.conf"]
