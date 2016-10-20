@@ -25,8 +25,7 @@ COPY config/locale /etc/default/locale
 # Enable backports repos and install some system utils included beanstalkd
 RUN apt-get -qq update && \
     apt-get install -qq -y --no-install-recommends apt-utils locales apt-transport-https ca-certificates && \
-    locale-gen en en_US en_US.UTF-8 && \
-    dpkg-reconfigure locales && \
+    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
     echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list && \
     echo 'deb https://apt.dockerproject.org/repo debian-jessie main' > /etc/apt/sources.list.d/docker-engine.list && \
     ## Docker repos GPG keys: https://docs.docker.com/engine/installation/linux/debian/#/debian-jessie-80-64-bit
