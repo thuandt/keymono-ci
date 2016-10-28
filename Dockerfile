@@ -4,7 +4,7 @@ MAINTAINER Thuan Duong <thuandt26@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
-ENV CLOUDSDK_VERSION 131.0.0
+ENV CLOUDSDK_VERSION 132.0.0
 
 ENV JAVA_VERSION 8u102
 ENV JAVA_DEBIAN_VERSION 8u102-b14.1-1~bpo8+1
@@ -32,7 +32,7 @@ RUN apt-get -qq update && \
     apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
     apt-get -qq update && \
     apt-get install -qq -y --no-install-recommends \
-            jq unzip rsync expect tcl tcl-tclreadline bzip2 unzip xz-utils \
+            jq unzip rsync expect tcl tcl-tclreadline bzip2 unzip xz-utils screen tmux \
             beanstalkd mysql-client docker-engine
 
 # Install glide, protoc, gometalinter and some golang tools
