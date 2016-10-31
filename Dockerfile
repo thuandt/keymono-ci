@@ -2,6 +2,10 @@ FROM golang:1.7
 
 MAINTAINER Thuan Duong <thuandt26@gmail.com>
 
+# Use specific path for go tools
+ENV GOBIN /usr/local/bin
+ENV GOPATH /go-tools
+
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
 ENV CLOUDSDK_VERSION 132.0.0
@@ -43,7 +47,8 @@ RUN curl https://glide.sh/get | bash && \
            github.com/kisielk/errcheck \
            github.com/golang/protobuf/proto \
            github.com/golang/protobuf/protoc-gen-go \
-           github.com/ckaznocha/protoc-gen-lint
+           github.com/ckaznocha/protoc-gen-lint && \
+    rm -rf /go-tools
 
 # Install OpenJDK for kafka
 # Based offical openjdk Dockerfile
@@ -76,6 +81,9 @@ RUN curl -s https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cl
 
 # 2181 is zookeeper, 9092 is kafka, 11300 is beanstalkd
 EXPOSE 2181 9092 11300
+
+# Reset GOPATH env
+ENV GOPATH /go
 
 ENV LANG en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
