@@ -59,9 +59,11 @@ RUN apt-get install -y \
     rm -rf /var/lib/apt/lists/* && \
     /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
-# Install nodejs for React project deployment
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-    apt-get install -qq -y nodejs
+# Install nodejs, yarn for React project deployment
+RUN apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3 && \
+    echo "deb http://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+    apt-get install -qq -y nodejs yarn
 
 # Install Kafka, Zookeeper
 RUN apt-get install -qq -y --no-install-recommends zookeeper supervisor dnsutils && \
