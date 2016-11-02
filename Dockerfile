@@ -35,8 +35,8 @@ RUN apt-get -qq update && \
     ## Docker repos GPG keys: https://docs.docker.com/engine/installation/linux/debian/#/debian-jessie-80-64-bit
     apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
     apt-get -qq update && \
-    apt-get install -qq -y --no-install-recommends \
-            jq unzip rsync expect tcl tcl-tclreadline bzip2 unzip xz-utils screen tmux \
+    apt-get install -qq -y --no-install-recommends jq bzip2 unzip xz-utils \
+            rsync expect tcl tcl-tclreadline telnet screen tmux \
             beanstalkd mysql-client docker-engine
 
 # Install glide, protoc, gometalinter and some golang tools
