@@ -10,8 +10,8 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
 ENV CLOUDSDK_VERSION 133.0.0
 
-ENV JAVA_VERSION 8u102
-ENV JAVA_DEBIAN_VERSION 8u102-b14.1-1~bpo8+1
+ENV JAVA_VERSION 8u111
+ENV JAVA_DEBIAN_VERSION 8u111-b14-2~bpo8+1
 
 # see https://bugs.debian.org/775775
 # and https://github.com/docker-library/java/issues/19#issuecomment-70546872
